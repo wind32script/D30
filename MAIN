@@ -1,0 +1,22 @@
+this addAction ["Взять в аренду 5 000 000", {   
+    params ["_target", "_caller"];   
+ _money = _caller getVariable ["ExileMoney", 0];  
+ if ( _money > 5000000)then   
+ {  
+ _object = nearestObjects [ _caller,[], 50 ];  
+   
+  {  
+   if  (_x isKindOf "CUP_B_D30_CDF")  then {    
+   _caller setVariable ["ExileMoney",  ( _caller getVariable ["ExileMoney", 0]) - 5000000 , true];   
+   ["ErrorTitleAndText", ["Успех", "Спасибо за деньги, иди постреляй немного!"]] call ExileClient_gui_toaster_addTemplateToast;   
+   _x setVehicleLock "UNLOCKED";  
+   };   
+  }forEach _object;   
+   
+ }else{  
+   
+ ["ErrorTitleAndText", ["Ошибка", "Иди принеси мне деньги, потом дам пострелять!"  ]] call ExileClient_gui_toaster_addTemplateToast;   
+   
+ };  
+   
+}];   
